@@ -43,7 +43,7 @@ Rather than relying on a single, monolithic AI to make one slow decision, we uti
 
 4. **Launch the Swarm:**
    ```bash
-   streamlit run app.py
+   streamlit run swarm.py
    ```
 
 ## Future Roadmap
