@@ -21,13 +21,13 @@ num_agents = st.sidebar.slider("Number of Agents", 1000, 20000, 10000, step=1000
 
 # --- HOOK FOR DUST (RAG KNOWLEDGE BASE) ---
 st.sidebar.markdown("---")
-st.sidebar.subheader("Knowledge Base Integration (Dust)")
+st.sidebar.subheader("Knowledge Base Integration")
 dust_query = st.sidebar.text_input("Ask Market Oracle:",
                                    placeholder="e.g., Extract benchmarks from Savills Autumn 2025")
 
 if dust_query:
     st.sidebar.info(
-        "Dust AI: Based on Savills Autumn 2025. Stress-test Yield Floor: 2.9%. Max Composite Risk: 34/50. Targets: Notting Hill (W11), Bayswater (W2), St John's Wood (NW8).")
+        "Based on Savills Autumn 2025. Stress-test Yield Floor: 2.9%. Max Composite Risk: 34/50. Targets: Notting Hill (W11), Bayswater (W2), St John's Wood (NW8).")
     min_yield = 2.9
     max_risk = 34
 else:
@@ -136,12 +136,12 @@ st.markdown("---")
 genai.configure(api_key="AIzaSyCB1Yi3xWCDJQXFk4JdKEndCizn7kejtzc")
 
 if 'prime_target' in st.session_state:
-    if st.button("Generate & Email Executive Report (DeepMind & CodeWords)", use_container_width=True):
+    if st.button("Generate & Email Executive Report", use_container_width=True):
         target = st.session_state.prime_target
 
         actual_gemini_report = ""
 
-        with st.spinner("DeepMind AI is generating investment rationale..."):
+        with st.spinner("Generating investment rationale..."):
             try:
                 model = genai.GenerativeModel('gemini-1.5-flash')
                 prompt = f"""Act as an elite Prime Central London real estate investment analyst. 
@@ -154,7 +154,7 @@ if 'prime_target' in st.session_state:
                 st.info(f"DeepMind Analysis:\n\n{actual_gemini_report}")
 
             except Exception as e:
-                actual_gemini_report = f"DeepMind Analysis: This property offers an exceptional {target[2]:.1f}% yield, comfortably exceeding the institutional baseline. Furthermore, its low Composite Risk Index of {target[3]:.0f} ensures asset security, ESG compliance, and tenant stability. This asymmetrical risk-reward profile mandates immediate acquisition by the Swarm."
+                actual_gemini_report = f"Analysis: This property offers an exceptional {target[2]:.1f}% yield, comfortably exceeding the institutional baseline. Furthermore, its low Composite Risk Index of {target[3]:.0f} ensures asset security, ESG compliance, and tenant stability. This asymmetrical risk-reward profile mandates immediate acquisition by the Swarm."
                 st.info(actual_gemini_report)
 
         with st.spinner("Transmitting to CodeWords for automated CIO notification..."):
@@ -175,3 +175,4 @@ if 'prime_target' in st.session_state:
             except Exception as e:
 
                 pass
+
